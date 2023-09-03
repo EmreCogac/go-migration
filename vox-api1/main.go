@@ -26,8 +26,8 @@ func init() {
 func main() {
 
 	db := initializers.DB
-	var result string
-	db.Raw("SELECT name FROM users WHERE id = 1", 1).Scan(&result)
+	result := map[string]interface{}{}
+	db.Table("users").Take(&result)
 
 	router := server.Group("/api")
 	router.GET("/healthchecker", func(ctx *gin.Context) {
